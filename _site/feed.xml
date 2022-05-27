@@ -1,17 +1,69 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-25T20:47:02-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2022/05/25/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2022-05-25T20:42:23-07:00</published><updated>2022-05-25T20:42:23-07:00</updated><id>http://localhost:4000/jekyll/update/2022/05/25/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2022/05/25/welcome-to-jekyll.html"><![CDATA[<p>You’ll find this post in your <code class="language-plaintext highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="language-plaintext highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-26T20:25:41-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">one8three</title><subtitle>Your Site Description
+</subtitle><author><name>Randy</name></author><entry><title type="html">OPNsense on RockPro64 (and ARM64)</title><link href="http://localhost:4000/2022/05/25/OPNsense-on-RockPro64.html" rel="alternate" type="text/html" title="OPNsense on RockPro64 (and ARM64)" /><published>2022-05-25T00:00:00-07:00</published><updated>2022-05-25T00:00:00-07:00</updated><id>http://localhost:4000/2022/05/25/OPNsense-on-RockPro64</id><content type="html" xml:base="http://localhost:4000/2022/05/25/OPNsense-on-RockPro64.html"><![CDATA[<h1 id="info"><b><u>Info</u></b></h1>
+<p>Although not officially supported, OPNsense can be built for several arm64 devices using the <a href="https://github.com/opnsense/tools">OPNsense tools</a>. I maintain a publicly accessible <a href="https://opnsense.one8three.xyz/">arm64 repo</a> with an image built for the RockPro64. Since OPNsense on arm64 is not officially supported, it should be considered experimental. Use it at your own risk.</p>
 
-<p>Jekyll requires blog post files to be named according to the following format:</p>
+<p>Most of the information on this page does apply to any arm64 device running OPNsense but it is focused on the RockPro64. If you are running OPNsense on another arm64 device (built yourself or downloaded elsewhere), you can use the one8three repo for package updates/installations. However, I am unsure how often it will be updated.</p>
 
-<p><code class="language-plaintext highlighter-rouge">YEAR-MONTH-DAY-title.MARKUP</code></p>
+<h2 id="requirements"><b><u>Requirements</u></b></h2>
+<ul>
+  <li>RockPro64</li>
+  <li>PCIe NIC - A list of confirmed compatible PCIe cards can be found <a href="https://wiki.freebsd.org/arm/RockChip#Tested_PCIe_devices_on_RockPro64">here</a></li>
+  <li>Boot media (flash drive, MicroSD card, USB SSD, eMMC, etc).
+    <ul>
+      <li>4GB bare minimum</li>
+      <li>16GB recommended minimum</li>
+      <li>USB booting will require the SPI be flashed with</li>
+    </ul>
+  </li>
+</ul>
 
-<p>Where <code class="language-plaintext highlighter-rouge">YEAR</code> is a four-digit number, <code class="language-plaintext highlighter-rouge">MONTH</code> and <code class="language-plaintext highlighter-rouge">DAY</code> are both two-digit numbers, and <code class="language-plaintext highlighter-rouge">MARKUP</code> is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+<p>A USB Ethernet adapter can likely be used instead of the PCIe NIC but is not recommended.</p>
 
-<p>Jekyll also offers powerful support for code snippets:</p>
+<h2 id="note"><b><u>Note</u></b></h2>
+<p>My RockPro64 image includes a few extras compared to the default OPNsense images:</p>
+<ul>
+  <li>vim</li>
+  <li>wireguard</li>
+  <li>iperf3</li>
+  <li>mdns-repeater</li>
+  <li>ddclient</li>
+</ul>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
-<span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
-<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+<h1 id="setup"><b><u>Setup</u></b></h1>
+<p>The moment you’ve all been waiting for!</p>
 
-<p>Check out the <a href="https://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>]]></content><author><name></name></author><category term="jekyll" /><category term="update" /><summary type="html"><![CDATA[You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.]]></summary></entry></feed>
+<h2 id="1-download"><b><u>1. Download</u></b></h2>
+<p>The latest build can be found here: <a href="https://opnsense.one8three.xyz/opnsense/FreeBSD%3A13%3Aaarch64/22.1/images/">https://opnsense.one8three.xyz/opnsense/FreeBSD%3A13%3Aaarch64/22.1/images/</a></p>
+
+<h2 id="2-install"><b><u>2. Install</u></b></h2>
+<p>Write the image to a SD card or other boot media.</p>
+
+<p><a href="https://www.balena.io/etcher/">Etcher</a> is an easy and reliable way to write the image to your boot media. On MacOS or Linux, you can also just use <code class="language-plaintext highlighter-rouge">dd if=/path/to/OPNsense.img of=/dev/sdcard</code></p>
+
+<h2 id="3-post-istall"><b><u>3. Post-istall</u></b></h2>
+<p>After installing, you’ll need to configure a few things. The initial configuration will be done by connecting an ethernet cable between the RockPro64 and another computer. In my case, the <code class="language-plaintext highlighter-rouge">igb0</code> port of my NIC was accessible at <code class="language-plaintext highlighter-rouge">192.168.1.1</code>. You will need to set your computer  Default username/password is <code class="language-plaintext highlighter-rouge">root/opnsense</code>.</p>
+
+<h2 id="4-configure-the-updates-repo"><b><u>4. Configure the updates repo</u></b></h2>
+<p><b>4a.</b> SSH into OPNsense with root privileges (this will need to be enabled through the web UI at System &gt; Settings &gt; Administration). Run this command to accept the fingerprint</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://opnsense.one8three.xyz/opnsense/fingerprint.txt -o /usr/local/etc/pkg/fingerprints/OPNsense/trusted/opnsense.one8three.xyz
+</code></pre></div></div>
+
+<p><b>4b.</b> Back in the web GUI, go to System &gt; Firmware &gt; Settings. Change the Mirror setting to:</p>
+<ul>
+  <li>(Other)</li>
+  <li>https://opnsense.one8three.xyz/opnsense</li>
+</ul>
+
+<h2 id="5-enable-the-system-fan-if-you-are-using-one"><b><u>5. Enable the system fan (if you are using one)</u></b></h2>
+<p>This is specific to the RockPro64. SSH into the system with root privileges, make a new file and mark it as executable:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch /usr/local/etc/rc.syshook.d/start/22-startfan
+chmod +x /usr/local/etc/rc.syshook.d/start/22-startfan
+</code></pre></div></div>
+<p>Using your favorite text editor, insert the following text into that file
+<code class="language-plaintext highlighter-rouge">pwm -E -f pwmc1.0 -p 50000 -d 37000</code></p>
+
+<h2 id="6-grow-the-filesystem"><b><u>6. Grow the filesystem</u></b></h2>
+<p>This is necessary to use the full storage space of the drive you are using. SSH into OPNsense with root privileges and run the following command:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service growfs onestart
+</code></pre></div></div>
+<p>It’s a good idea to reboot after.</p>]]></content><author><name>Randy</name></author><category term="opnsense" /><category term="sbc" /><category term="security" /><category term="project" /><summary type="html"><![CDATA[Info Although not officially supported, OPNsense can be built for several arm64 devices using the OPNsense tools. I maintain a publicly accessible arm64 repo with an image built for the RockPro64. Since OPNsense on arm64 is not officially supported, it should be considered experimental. Use it at your own risk. Most of the information on this page does apply to any arm64 device running OPNsense but it is focused on the RockPro64. If you are running OPNsense on another arm64 device (built yourself or downloaded elsewhere), you can use the one8three repo for package updates/installations. However, I am unsure how often it will be updated. Requirements RockPro64 PCIe NIC - A list of confirmed compatible PCIe cards can be found here Boot media (flash drive, MicroSD card, USB SSD, eMMC, etc). 4GB bare minimum 16GB recommended minimum USB booting will require the SPI be flashed with A USB Ethernet adapter can likely be used instead of the PCIe NIC but is not recommended. Note My RockPro64 image includes a few extras compared to the default OPNsense images: vim wireguard iperf3 mdns-repeater ddclient Setup The moment you’ve all been waiting for! 1. Download The latest build can be found here: https://opnsense.one8three.xyz/opnsense/FreeBSD%3A13%3Aaarch64/22.1/images/ 2. Install Write the image to a SD card or other boot media. Etcher is an easy and reliable way to write the image to your boot media. On MacOS or Linux, you can also just use dd if=/path/to/OPNsense.img of=/dev/sdcard 3. Post-istall After installing, you’ll need to configure a few things. The initial configuration will be done by connecting an ethernet cable between the RockPro64 and another computer. In my case, the igb0 port of my NIC was accessible at 192.168.1.1. You will need to set your computer Default username/password is root/opnsense. 4. Configure the updates repo 4a. SSH into OPNsense with root privileges (this will need to be enabled through the web UI at System &gt; Settings &gt; Administration). Run this command to accept the fingerprint curl https://opnsense.one8three.xyz/opnsense/fingerprint.txt -o /usr/local/etc/pkg/fingerprints/OPNsense/trusted/opnsense.one8three.xyz 4b. Back in the web GUI, go to System &gt; Firmware &gt; Settings. Change the Mirror setting to: (Other) https://opnsense.one8three.xyz/opnsense 5. Enable the system fan (if you are using one) This is specific to the RockPro64. SSH into the system with root privileges, make a new file and mark it as executable: touch /usr/local/etc/rc.syshook.d/start/22-startfan chmod +x /usr/local/etc/rc.syshook.d/start/22-startfan Using your favorite text editor, insert the following text into that file pwm -E -f pwmc1.0 -p 50000 -d 37000 6. Grow the filesystem This is necessary to use the full storage space of the drive you are using. SSH into OPNsense with root privileges and run the following command: service growfs onestart It’s a good idea to reboot after.]]></summary></entry></feed>
