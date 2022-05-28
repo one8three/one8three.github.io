@@ -67,4 +67,11 @@ This is necessary to use the full storage space of the drive you are using. SSH 
 ~~~
 service growfs onestart
 ~~~
-It's a good idea to reboot after.
+It's a good idea to reboot after this step.
+
+## <b><u>7. Finish configuration!</u></b>
+This part is up to you! Add some VLANs, configure a VPN, set up DHCP, DNS ad-blocking, etc...the OPNsense world is now yours!
+
+
+
+___
