@@ -2,6 +2,7 @@
 title: OPNsense on RockPro64 (and ARM64)
 tags: opnsense sbc security project
 ---
+# This is a WIP and may not currently have complete info
 
 # <b><u>Info</u></b>
 Although not officially supported, OPNsense can be built for several arm64 devices using the [OPNsense tools](https://github.com/opnsense/tools). I maintain a publicly accessible [arm64 repo](https://opnsense.one8three.xyz/) with an image built for the RockPro64. Since OPNsense on arm64 is not officially supported, it should be considered experimental. Use it at your own risk.
@@ -13,8 +14,7 @@ Most of the information on this page does apply to any arm64 device running OPNs
   - PCIe NIC - A list of confirmed compatible PCIe cards can be found [here](https://wiki.freebsd.org/arm/RockChip#Tested_PCIe_devices_on_RockPro64)
   - Boot media (flash drive, MicroSD card, USB SSD, eMMC, etc). 
     - 4GB bare minimum
-    - 16GB recommended minimum
-    - USB booting will require the SPI be flashed with 
+    - 16GB recommended minimum 
 
 A USB Ethernet adapter can likely be used instead of the PCIe NIC but is not recommended.
 
@@ -57,7 +57,10 @@ touch /usr/local/etc/rc.syshook.d/start/22-startfan
 chmod +x /usr/local/etc/rc.syshook.d/start/22-startfan
 ~~~
 Using your favorite text editor, insert the following text into that file
-`pwm -E -f pwmc1.0 -p 50000 -d 37000`
+~~~
+pwm -E -f pwmc1.0 -p 50000 -d 37000
+~~~
+Adjusting the second number will change the fan speed. Lower is faster.
 
 ## <b><u>6. Grow the filesystem</u></b>
 This is necessary to use the full storage space of the drive you are using. SSH into OPNsense with root privileges and run the following command:
