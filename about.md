@@ -11,8 +11,6 @@ titles:
 key: about
 ---
 
-# Hi!
-
 I like to tinker with tech. Sometimes I document it and share with others. This site is an attempt at keeping track of that documentation. Hopefully it'll be useful for others too!
 
 Most of my projects relate to MacOS, Linux, and single board computers. I work with Windows too so maybe some PowerShell stuff....
