@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-26T20:25:41-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">one8three</title><subtitle>Your Site Description
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-05-27T17:19:26-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">one8three</title><subtitle>Your Site Description
 </subtitle><author><name>Randy</name></author><entry><title type="html">OPNsense on RockPro64 (and ARM64)</title><link href="http://localhost:4000/2022/05/25/OPNsense-on-RockPro64.html" rel="alternate" type="text/html" title="OPNsense on RockPro64 (and ARM64)" /><published>2022-05-25T00:00:00-07:00</published><updated>2022-05-25T00:00:00-07:00</updated><id>http://localhost:4000/2022/05/25/OPNsense-on-RockPro64</id><content type="html" xml:base="http://localhost:4000/2022/05/25/OPNsense-on-RockPro64.html"><![CDATA[<h1 id="info"><b><u>Info</u></b></h1>
 <p>Although not officially supported, OPNsense can be built for several arm64 devices using the <a href="https://github.com/opnsense/tools">OPNsense tools</a>. I maintain a publicly accessible <a href="https://opnsense.one8three.xyz/">arm64 repo</a> with an image built for the RockPro64. Since OPNsense on arm64 is not officially supported, it should be considered experimental. Use it at your own risk.</p>
 
@@ -66,4 +66,305 @@ chmod +x /usr/local/etc/rc.syshook.d/start/22-startfan
 <p>This is necessary to use the full storage space of the drive you are using. SSH into OPNsense with root privileges and run the following command:</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service growfs onestart
 </code></pre></div></div>
-<p>It’s a good idea to reboot after.</p>]]></content><author><name>Randy</name></author><category term="opnsense" /><category term="sbc" /><category term="security" /><category term="project" /><summary type="html"><![CDATA[Info Although not officially supported, OPNsense can be built for several arm64 devices using the OPNsense tools. I maintain a publicly accessible arm64 repo with an image built for the RockPro64. Since OPNsense on arm64 is not officially supported, it should be considered experimental. Use it at your own risk. Most of the information on this page does apply to any arm64 device running OPNsense but it is focused on the RockPro64. If you are running OPNsense on another arm64 device (built yourself or downloaded elsewhere), you can use the one8three repo for package updates/installations. However, I am unsure how often it will be updated. Requirements RockPro64 PCIe NIC - A list of confirmed compatible PCIe cards can be found here Boot media (flash drive, MicroSD card, USB SSD, eMMC, etc). 4GB bare minimum 16GB recommended minimum USB booting will require the SPI be flashed with A USB Ethernet adapter can likely be used instead of the PCIe NIC but is not recommended. Note My RockPro64 image includes a few extras compared to the default OPNsense images: vim wireguard iperf3 mdns-repeater ddclient Setup The moment you’ve all been waiting for! 1. Download The latest build can be found here: https://opnsense.one8three.xyz/opnsense/FreeBSD%3A13%3Aaarch64/22.1/images/ 2. Install Write the image to a SD card or other boot media. Etcher is an easy and reliable way to write the image to your boot media. On MacOS or Linux, you can also just use dd if=/path/to/OPNsense.img of=/dev/sdcard 3. Post-istall After installing, you’ll need to configure a few things. The initial configuration will be done by connecting an ethernet cable between the RockPro64 and another computer. In my case, the igb0 port of my NIC was accessible at 192.168.1.1. You will need to set your computer Default username/password is root/opnsense. 4. Configure the updates repo 4a. SSH into OPNsense with root privileges (this will need to be enabled through the web UI at System &gt; Settings &gt; Administration). Run this command to accept the fingerprint curl https://opnsense.one8three.xyz/opnsense/fingerprint.txt -o /usr/local/etc/pkg/fingerprints/OPNsense/trusted/opnsense.one8three.xyz 4b. Back in the web GUI, go to System &gt; Firmware &gt; Settings. Change the Mirror setting to: (Other) https://opnsense.one8three.xyz/opnsense 5. Enable the system fan (if you are using one) This is specific to the RockPro64. SSH into the system with root privileges, make a new file and mark it as executable: touch /usr/local/etc/rc.syshook.d/start/22-startfan chmod +x /usr/local/etc/rc.syshook.d/start/22-startfan Using your favorite text editor, insert the following text into that file pwm -E -f pwmc1.0 -p 50000 -d 37000 6. Grow the filesystem This is necessary to use the full storage space of the drive you are using. SSH into OPNsense with root privileges and run the following command: service growfs onestart It’s a good idea to reboot after.]]></summary></entry></feed>
+<p>It’s a good idea to reboot after.</p>]]></content><author><name>Randy</name></author><category term="opnsense" /><category term="sbc" /><category term="security" /><category term="project" /><summary type="html"><![CDATA[Info Although not officially supported, OPNsense can be built for several arm64 devices using the OPNsense tools. I maintain a publicly accessible arm64 repo with an image built for the RockPro64. Since OPNsense on arm64 is not officially supported, it should be considered experimental. Use it at your own risk. Most of the information on this page does apply to any arm64 device running OPNsense but it is focused on the RockPro64. If you are running OPNsense on another arm64 device (built yourself or downloaded elsewhere), you can use the one8three repo for package updates/installations. However, I am unsure how often it will be updated. Requirements RockPro64 PCIe NIC - A list of confirmed compatible PCIe cards can be found here Boot media (flash drive, MicroSD card, USB SSD, eMMC, etc). 4GB bare minimum 16GB recommended minimum USB booting will require the SPI be flashed with A USB Ethernet adapter can likely be used instead of the PCIe NIC but is not recommended. Note My RockPro64 image includes a few extras compared to the default OPNsense images: vim wireguard iperf3 mdns-repeater ddclient Setup The moment you’ve all been waiting for! 1. Download The latest build can be found here: https://opnsense.one8three.xyz/opnsense/FreeBSD%3A13%3Aaarch64/22.1/images/ 2. Install Write the image to a SD card or other boot media. Etcher is an easy and reliable way to write the image to your boot media. On MacOS or Linux, you can also just use dd if=/path/to/OPNsense.img of=/dev/sdcard 3. Post-istall After installing, you’ll need to configure a few things. The initial configuration will be done by connecting an ethernet cable between the RockPro64 and another computer. In my case, the igb0 port of my NIC was accessible at 192.168.1.1. You will need to set your computer Default username/password is root/opnsense. 4. Configure the updates repo 4a. SSH into OPNsense with root privileges (this will need to be enabled through the web UI at System &gt; Settings &gt; Administration). Run this command to accept the fingerprint curl https://opnsense.one8three.xyz/opnsense/fingerprint.txt -o /usr/local/etc/pkg/fingerprints/OPNsense/trusted/opnsense.one8three.xyz 4b. Back in the web GUI, go to System &gt; Firmware &gt; Settings. Change the Mirror setting to: (Other) https://opnsense.one8three.xyz/opnsense 5. Enable the system fan (if you are using one) This is specific to the RockPro64. SSH into the system with root privileges, make a new file and mark it as executable: touch /usr/local/etc/rc.syshook.d/start/22-startfan chmod +x /usr/local/etc/rc.syshook.d/start/22-startfan Using your favorite text editor, insert the following text into that file pwm -E -f pwmc1.0 -p 50000 -d 37000 6. Grow the filesystem This is necessary to use the full storage space of the drive you are using. SSH into OPNsense with root privileges and run the following command: service growfs onestart It’s a good idea to reboot after.]]></summary></entry><entry><title type="html">MacOS on a Chromebook</title><link href="http://localhost:4000/2021/03/10/MacOS-on-a-Chromebook.html" rel="alternate" type="text/html" title="MacOS on a Chromebook" /><published>2021-03-10T00:00:00-08:00</published><updated>2021-03-10T00:00:00-08:00</updated><id>http://localhost:4000/2021/03/10/MacOS-on-a-Chromebook</id><content type="html" xml:base="http://localhost:4000/2021/03/10/MacOS-on-a-Chromebook.html"><![CDATA[<h1 id="dell-chromebook-13-7310-hackintosh">Dell Chromebook 13 7310 Hackintosh</h1>
+
+<h3 id="confirmed-working-on">Confirmed working on:</h3>
+<ul>
+  <li>MacOS: <strong>Big Sur 11.6</strong></li>
+  <li>MrChromebox coreboot: <strong>4.14</strong></li>
+  <li>OpenCore: <strong>0.7.3</strong></li>
+</ul>
+
+<p>#
+<strong>Disclaimer:</strong> This is not meant to be a thorough guide or walkthrough. It is essentially a dump of files and notes to get MacOS working on a Dell Chromebook 13 7310. I will try to keep this updated as I update my Chromebook to future MacOS releases. It’s not guaranteed to work on your specific device. If it doesn’t, you likely need to make some sort of changes to the supplied config.plist. I do not know what those changes may be. I am not responsible for any damage done or data lost by attempting this.</p>
+
+<h3 id="update-10032021">Update 10/03/2021</h3>
+<p><strong>Note: users updating from MrChromeBox firmware 4.12 or older should <a href="https://dortania.github.io/OpenCore-Post-Install/misc/nvram.html#enabling-emulated-nvram-with-a-nvram-plist">enable the emulated NVRAM logout hook</a></strong></p>
+
+<ul>
+  <li>Updated for OpenCore 0.7.3</li>
+  <li>“Fixed” compatibility with MrChromeBox firmware &gt; 4.12
+    <ul>
+      <li>Switch to emulated NVRAM as native NVRAM is now broken with MacOS and MrChromeBox firmware</li>
+    </ul>
+  </li>
+  <li>Confirm compatibility with MacOS Big Sur 11.6</li>
+  <li>Recreated SSDT files to better match new firmware. Replacing the old ones with the new ones is recommended.</li>
+</ul>
+
+<h3 id="requirements">Requirements:</h3>
+<ul>
+  <li>Core i3 or Core i5 processor</li>
+  <li><a href="https://mrchromebox.tech/#fwscript">MrChromebox’s coreboot firmware 4.14</a></li>
+  <li><a href="https://github.com/acidanthera/OpenCorePkg/releases/tag/0.7.3">OpenCore 0.7.3</a></li>
+  <li>Minimum of a 32GB SSD
+    <ul>
+      <li>Minimum 64GB recommended</li>
+    </ul>
+  </li>
+  <li>A <a href="https://dortania.github.io/Wireless-Buyers-Guide/types-of-wireless-card/m2.html#supported-cards">compatible m.2 WiFi card</a>
+    <ul>
+      <li>I can confirm the Dell DW1560 works in MacOS (with additional kexts), Windows, &amp; Ubuntu</li>
+      <li>Other users have reported success with the BCM94360NG (has native MacOS support so no additional kexts required!)</li>
+      <li><strong>Note:</strong> There is now an Intel wifi kext and the stock wireless card is listed as compatible. I don’t have experience with using this so it won’t be covered here.
+        <ul>
+          <li>https://github.com/OpenIntelWireless/itlwm</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>MacOS installer flash drive
+    <ul>
+      <li>See the guides linked in <a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310#basic-installation-steps">Basic Installation Steps</a> below</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="notes">Notes:</h3>
+<ul>
+  <li>Keyboard backlight is controlled with left ctrl + alt + “comma” and “period” keys. There are 7 stages, including off</li>
+  <li>Most top row keys are mapped with the custom VoodooPS2Controller.kext
+    <ul>
+      <li>Back arrow key = Previous track</li>
+      <li>Forward arrow key = Next track</li>
+      <li>Refresh key = Play/Pause</li>
+      <li>Brightness down key = Brightness down</li>
+      <li>Brightness up key = Brightness up</li>
+      <li>Mute key = Mute</li>
+      <li>Volume down key = Volume down</li>
+      <li>Volume up key = Volume up</li>
+    </ul>
+  </li>
+  <li>OpenCore is set to boot at 1280x1024 - booting at 1920x1080 causes the login screen to load up with extreme graphical glitches so don’t bother changing it</li>
+</ul>
+
+<h3 id="whats-working">What’s Working:</h3>
+<ul>
+  <li>Just about everything!</li>
+</ul>
+
+<h3 id="whats-not-working">What’s Not Working:</h3>
+<ul>
+  <li>Touchscreen - unlikely that this will ever work as there is no kext for it - fairly uncommon to have one on this device anyway</li>
+  <li>Most DRM does not work. This means no Apple TV shows, Hulu, Netflix (in Safari), Amazon Prime streaming, etc.
+    <ul>
+      <li>This isn’t specific to the Dell CB13. DRM simply does not work on an iGPU only Hackintosh</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="to-do">To Do:</h3>
+<ul>
+  <li>???</li>
+</ul>
+
+<h2 id="before-getting-started">Before Getting Started</h2>
+<ul>
+  <li>I strongly suggest becoming familiar with Hackintoshing before jumping into this. Know the downsides, shortcomings, and difficulties. Read through the <a href="https://dortania.github.io/OpenCore-Install-Guide/">dortania guide</a>, poke around on <a href="https://reddit.com/r/hackintosh">r/hackintosh</a>, have a look around <a href="https://www.insanelymac.com">InsanelyMac</a> and <a href="https://www.tonymacx86.com">TonyMacX86</a> (even though their tools aren’t used here, they still have a lot of useful information), and do some general web searches. Even if a lot of it doesn’t make sense, just reading through it and becoming familiar with terms will be helpful!</li>
+  <li>Updates to MacOS, OpenCore, or firmware may break your installation! The latest versions that I have confirmed to work will always be at the top of the this page.</li>
+  <li>Don’t let this section scare you off! Once MacOS is up and running on your system, it is very stable!</li>
+</ul>
+
+<h2 id="basic-installation-steps">Basic Installation Steps</h2>
+<ul>
+  <li>Install/update <a href="https://mrchromebox.tech/#fwscript">MrChromebox coreboot firmware</a> if you haven’t already</li>
+  <li>Get the MAC address of your WiFi card - it should be printed on the WiFi card or you can get it from your current OS - you’ll need this later</li>
+  <li>Create a MacOS installer flash drive
+    <ul>
+      <li>A guide can be found <a href="https://dortania.github.io/OpenCore-Install-Guide/installer-guide/#creating-the-usb">here</a></li>
+    </ul>
+  </li>
+  <li>Download <a href="https://github.com/acidanthera/OpenCorePkg/releases/tag/0.7.3">OpenCore 0.7.3</a> and copy only the files shown in <a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310/blob/master/Images/Required%20Files%20From%20OC.png">this screenshot</a> to your flash drive, keeping the folder structure as seen in the image</li>
+  <li>Download all of the <a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310#required-files">required files</a>
+    <ul>
+      <li>Be sure to make any edits mentioned - particularly to config.plist and VoodooRMI.kext</li>
+    </ul>
+  </li>
+  <li>Move the required files to their appropriate locations on your installer flash drive
+    <ul>
+      <li>Your EFI folder should look like <a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310/blob/master/Images/EFI.png">this</a> - make sure all of the files are there (leave out the 4 highlighted WiFi/Bluetooth kexts if you’re using a BCM94360NG or other natively supported wifi card)</li>
+    </ul>
+  </li>
+  <li>Install your new WiFi card if you haven’t already
+    <ul>
+      <li>I had an odd issue of the Chromebook not booting after initially installing the new WiFi card. If this happens, disconnect the battery and WiFi card and try again.</li>
+    </ul>
+  </li>
+  <li>Boot to your installer and install MacOS</li>
+  <li>Boot into MacOS using your installer flash drive and copy the EFI folder from you installer flash drive to the EFI partition of your internal SSD - you can mount the EFI partition with <a href="https://github.com/corpnewt/MountEFI">MountEFI</a>
+    <ul>
+      <li>More info can be found <a href="https://dortania.github.io/OpenCore-Post-Install/universal/oc2hdd.html">here</a></li>
+    </ul>
+  </li>
+  <li>Follow the <a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310#post-install">post install</a> steps below</li>
+</ul>
+
+<h2 id="post-install">Post-Install</h2>
+<ul>
+  <li>Disable force click in trackpad settings</li>
+  <li>Disable hibernate with “sudo pmset -a hibernatemode 0”</li>
+  <li><a href="https://dortania.github.io/OpenCore-Post-Install/misc/nvram.html#enabling-emulated-nvram-with-a-nvram-plist">Enable the emulated NVRAM logout hook</a></li>
+  <li>Map Full Screen and Mission Control keys
+    <ul>
+      <li>Map Full Screen button (F4) to full screen in: <strong>System Preferences &gt; Keyboard &gt; Shortcuts &gt; App Shortcuts</strong>
+        <ul>
+          <li><a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310/blob/master/Images/Full_Screen.png">Example screenshot</a></li>
+        </ul>
+      </li>
+      <li>Map Mission Control key (F5) Mission Control in: <strong>System Preferences &gt; Keyboard &gt; Shortcuts &gt; Mission Control</strong>
+        <ul>
+          <li><a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310/blob/master/Images/Mission_Control.png">Example screenshot</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Optional: Give OpenCore a <a href="https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html">GUI menu and boot chime</a>
+    <ul>
+      <li>Use this <a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310/raw/master/Misc%20FIles/OCEFIAudio_VoiceOver_Boot.wav">OCEFIAudio_VoiceOver_Boot.wav</a> as it is resampled to work with the CB13</li>
+    </ul>
+  </li>
+</ul>
+
+<p>If you want a full Hackintosh guide (not Chromebook specific), I suggest this one: https://dortania.github.io/OpenCore-Install-Guide/ -
+most of the files in this repo were created using this guide so you won’t need to generate them yourself. Simply pull them from here as you go through the guide.</p>
+
+<h2 id="required-files">Required Files</h2>
+
+<h3 id="opencore-config">OpenCore Config</h3>
+<p>Place config.plist in /EFI/OC/</p>
+<ul>
+  <li><a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310/tree/master/config-base.plist">config-base.plist</a>
+    <ul>
+      <li>Use <a href="https://github.com/corpnewt/ProperTree">ProperTree</a> to make the following edits to the config-base.plist file</li>
+      <li>If you are using a BCM94360NG for wifi:
+        <ul>
+          <li>Delete the following kext entries from the config:
+            <ul>
+              <li>AirportBrcmFixup.kext</li>
+              <li>AirPortBrcm4360_Injector.kext</li>
+              <li>BrcmBluetoothInjector.kext</li>
+              <li>BrcmFirmwareData.kext</li>
+              <li>BrcmPatchRAM3.kext</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>Follow the PlatformInfo portion of <a href="https://dortania.github.io/OpenCore-Install-Guide/config-laptop.plist/broadwell.html#platforminfo">this guide</a> to edit the config.plist
+        <ul>
+          <li>You can use <a href="https://github.com/corpnewt/GenSMBIOS">GenSMBIOS</a> to generate the SMBIOS info</li>
+          <li>Use a MacBookAir7,2 profile</li>
+          <li>In the config.plist, you need to fill in values for: SystemProductName, SystemSerialNumber, MLB, SystemUUID, and ROM</li>
+          <li>Use your MAC address without the colons for the ROM field (You did get your MAC address, right?)</li>
+        </ul>
+      </li>
+      <li>Be sure to rename the config file to config.plist</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="opencore-drivers">OpenCore Drivers</h3>
+<p>These are included with the OpenCore download except for HfsPlus.efi.
+Place these in /EFI/OC/Drivers</p>
+<ul>
+  <li>AudioDxe.efi</li>
+  <li><a href="https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi">HfsPlus.efi</a></li>
+  <li>OpenCanopy.efi</li>
+  <li>OpenRuntime.efi</li>
+</ul>
+
+<h3 id="ssdt-files">SSDT files</h3>
+<p>Place these in /EFI/OC/ACPI</p>
+<ul>
+  <li><a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310/raw/master/SSDT%20Files/SSDT-EC.aml">SSDT-EC.aml</a>
+    <ul>
+      <li>Creates a phony EC controller - required to boot Catalina</li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310/raw/master/SSDT%20Files/SSDT-PNLF.aml">SSDT-PLNF.aml</a>
+    <ul>
+      <li>Enables LCD backlight control</li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310/raw/master/SSDT%20Files/SSDT-PLUG.aml">SSDT-PLUG.aml</a>
+    <ul>
+      <li>Enables proper CPU power management</li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310/raw/master/SSDT%20Files/SSDT-HPET.aml">SSDT-HPET.aml</a>
+    <ul>
+      <li>Fixes IRQ conflicts with MacOS</li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310/raw/master/SSDT%20Files/SSDT-KBBL.aml">SSDT-KBBL.aml</a>
+    <ul>
+      <li>Required for keyboard backlight control</li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310/raw/master/SSDT%20Files/SSDT-SBUS-MCHC.aml">SSDT-SBUS-MCHC.aml</a>
+    <ul>
+      <li>This one might not actually be necessary but it doesn’t seem to have any negative side-effects</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="required-kexts">Required Kexts</h3>
+<p>Place these in /EFI/OC/Kexts</p>
+<ul>
+  <li><a href="https://github.com/acidanthera/applealc/releases">AppleALC.kext</a></li>
+  <li><a href="https://github.com/acidanthera/lilu/releases">Lilu.kext</a></li>
+  <li><a href="https://github.com/acidanthera/whatevergreen/releases">WhateverGreen.kext</a></li>
+  <li><a href="https://github.com/acidanthera/virtualsmc/releases">VirtualSMC.kext</a>
+    <ul>
+      <li>SMCBatteryManager.kext</li>
+      <li>SMCProcessor.kext</li>
+      <li>SMCSuperIO.kext</li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310/raw/master/CB13%20specific%20%20kexts/USBMap.zip">USBMap.kext</a></li>
+  <li><a href="https://github.com/VoodooI2C/VoodooI2C/releases">VoodooI2C.kext</a></li>
+  <li><a href="https://github.com/VoodooSMBus/VoodooRMI/releases">VoodooRMI.kext</a>
+    <ul>
+      <li>You will need to add ACPI0C50 to the info.plist file found in VoodooRMI.kext/Contents/PlugIns/RMII2C.kext/Contents/
+        <ul>
+          <li>Simply open the info.plist file, find the one instance of PNP0C50 and change it to ACPI0C50</li>
+        </ul>
+      </li>
+      <li>You do not need the included VoodooSMBus.kext. Leave it out.</li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/one8three/VoodooPS2-Chromebook/releases">VoodooPS2Controller.kext</a>
+    <ul>
+      <li>Custom for Chromebooks. It’s an old version but does everything we need at this point.</li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/acidanthera/CPUFriend/releases">CPUFriend.kext</a></li>
+  <li><a href="https://github.com/one8three/Hackintosh---Dell-Chromebook-13-7310/raw/master/CB13%20specific%20%20kexts/CPUFriendDataProvider.zip">CPUFriendDataProvider.kext</a></li>
+</ul>
+
+<h3 id="kexts-for-dell-dw1560-wifi">Kexts for Dell DW1560 wifi</h3>
+<p>Place these in /EFI/OC/Kexts</p>
+<ul>
+  <li><a href="https://github.com/acidanthera/airportbrcmfixup/releases">AirportBrcmFixup.kext</a></li>
+  <li><a href="https://github.com/acidanthera/BrcmPatchRAM/releases">BrcmPatchRAM3.kext</a>
+    <ul>
+      <li>BrcmBluetoothInjector.kext</li>
+      <li>BrcmFirmwareData.kext</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="credits--sources-in-no-particular-order-and-maybe-missing-some">Credits &amp; Sources (in no particular order and maybe missing some)</h3>
+<ul>
+  <li><a href="https://www.apple.com">Apple</a></li>
+  <li>https://github.com/MrChromebox</li>
+  <li>https://github.com/acidanthera</li>
+  <li>https://github.com/alexandred</li>
+  <li>https://github.com/RehabMan</li>
+  <li>https://github.com/corpnewt</li>
+  <li>https://www.insanelymac.com/</li>
+  <li>https://www.tonymacx86.com/</li>
+  <li>https://reddit.com/r/hackintosh</li>
+  <li>https://reddit.com/r/chrultrabook</li>
+  <li>https://github.com/one8three/VoodooPS2-CB13/</li>
+  <li>https://dortania.github.io/vanilla-laptop-guide/</li>
+</ul>]]></content><author><name>Randy</name></author><category term="MacOS" /><category term="Chromebook" /><category term="hackintosh" /><category term="project" /><summary type="html"><![CDATA[Dell Chromebook 13 7310 Hackintosh Confirmed working on: MacOS: Big Sur 11.6 MrChromebox coreboot: 4.14 OpenCore: 0.7.3 # Disclaimer: This is not meant to be a thorough guide or walkthrough. It is essentially a dump of files and notes to get MacOS working on a Dell Chromebook 13 7310. I will try to keep this updated as I update my Chromebook to future MacOS releases. It’s not guaranteed to work on your specific device. If it doesn’t, you likely need to make some sort of changes to the supplied config.plist. I do not know what those changes may be. I am not responsible for any damage done or data lost by attempting this. Update 10/03/2021 Note: users updating from MrChromeBox firmware 4.12 or older should enable the emulated NVRAM logout hook Updated for OpenCore 0.7.3 “Fixed” compatibility with MrChromeBox firmware &gt; 4.12 Switch to emulated NVRAM as native NVRAM is now broken with MacOS and MrChromeBox firmware Confirm compatibility with MacOS Big Sur 11.6 Recreated SSDT files to better match new firmware. Replacing the old ones with the new ones is recommended. Requirements: Core i3 or Core i5 processor MrChromebox’s coreboot firmware 4.14 OpenCore 0.7.3 Minimum of a 32GB SSD Minimum 64GB recommended A compatible m.2 WiFi card I can confirm the Dell DW1560 works in MacOS (with additional kexts), Windows, &amp; Ubuntu Other users have reported success with the BCM94360NG (has native MacOS support so no additional kexts required!) Note: There is now an Intel wifi kext and the stock wireless card is listed as compatible. I don’t have experience with using this so it won’t be covered here. https://github.com/OpenIntelWireless/itlwm MacOS installer flash drive See the guides linked in Basic Installation Steps below Notes: Keyboard backlight is controlled with left ctrl + alt + “comma” and “period” keys. There are 7 stages, including off Most top row keys are mapped with the custom VoodooPS2Controller.kext Back arrow key = Previous track Forward arrow key = Next track Refresh key = Play/Pause Brightness down key = Brightness down Brightness up key = Brightness up Mute key = Mute Volume down key = Volume down Volume up key = Volume up OpenCore is set to boot at 1280x1024 - booting at 1920x1080 causes the login screen to load up with extreme graphical glitches so don’t bother changing it What’s Working: Just about everything! What’s Not Working: Touchscreen - unlikely that this will ever work as there is no kext for it - fairly uncommon to have one on this device anyway Most DRM does not work. This means no Apple TV shows, Hulu, Netflix (in Safari), Amazon Prime streaming, etc. This isn’t specific to the Dell CB13. DRM simply does not work on an iGPU only Hackintosh To Do: ??? Before Getting Started I strongly suggest becoming familiar with Hackintoshing before jumping into this. Know the downsides, shortcomings, and difficulties. Read through the dortania guide, poke around on r/hackintosh, have a look around InsanelyMac and TonyMacX86 (even though their tools aren’t used here, they still have a lot of useful information), and do some general web searches. Even if a lot of it doesn’t make sense, just reading through it and becoming familiar with terms will be helpful! Updates to MacOS, OpenCore, or firmware may break your installation! The latest versions that I have confirmed to work will always be at the top of the this page. Don’t let this section scare you off! Once MacOS is up and running on your system, it is very stable! Basic Installation Steps Install/update MrChromebox coreboot firmware if you haven’t already Get the MAC address of your WiFi card - it should be printed on the WiFi card or you can get it from your current OS - you’ll need this later Create a MacOS installer flash drive A guide can be found here Download OpenCore 0.7.3 and copy only the files shown in this screenshot to your flash drive, keeping the folder structure as seen in the image Download all of the required files Be sure to make any edits mentioned - particularly to config.plist and VoodooRMI.kext Move the required files to their appropriate locations on your installer flash drive Your EFI folder should look like this - make sure all of the files are there (leave out the 4 highlighted WiFi/Bluetooth kexts if you’re using a BCM94360NG or other natively supported wifi card) Install your new WiFi card if you haven’t already I had an odd issue of the Chromebook not booting after initially installing the new WiFi card. If this happens, disconnect the battery and WiFi card and try again. Boot to your installer and install MacOS Boot into MacOS using your installer flash drive and copy the EFI folder from you installer flash drive to the EFI partition of your internal SSD - you can mount the EFI partition with MountEFI More info can be found here Follow the post install steps below Post-Install Disable force click in trackpad settings Disable hibernate with “sudo pmset -a hibernatemode 0” Enable the emulated NVRAM logout hook Map Full Screen and Mission Control keys Map Full Screen button (F4) to full screen in: System Preferences &gt; Keyboard &gt; Shortcuts &gt; App Shortcuts Example screenshot Map Mission Control key (F5) Mission Control in: System Preferences &gt; Keyboard &gt; Shortcuts &gt; Mission Control Example screenshot Optional: Give OpenCore a GUI menu and boot chime Use this OCEFIAudio_VoiceOver_Boot.wav as it is resampled to work with the CB13 If you want a full Hackintosh guide (not Chromebook specific), I suggest this one: https://dortania.github.io/OpenCore-Install-Guide/ - most of the files in this repo were created using this guide so you won’t need to generate them yourself. Simply pull them from here as you go through the guide. Required Files OpenCore Config Place config.plist in /EFI/OC/ config-base.plist Use ProperTree to make the following edits to the config-base.plist file If you are using a BCM94360NG for wifi: Delete the following kext entries from the config: AirportBrcmFixup.kext AirPortBrcm4360_Injector.kext BrcmBluetoothInjector.kext BrcmFirmwareData.kext BrcmPatchRAM3.kext Follow the PlatformInfo portion of this guide to edit the config.plist You can use GenSMBIOS to generate the SMBIOS info Use a MacBookAir7,2 profile In the config.plist, you need to fill in values for: SystemProductName, SystemSerialNumber, MLB, SystemUUID, and ROM Use your MAC address without the colons for the ROM field (You did get your MAC address, right?) Be sure to rename the config file to config.plist OpenCore Drivers These are included with the OpenCore download except for HfsPlus.efi. Place these in /EFI/OC/Drivers AudioDxe.efi HfsPlus.efi OpenCanopy.efi OpenRuntime.efi SSDT files Place these in /EFI/OC/ACPI SSDT-EC.aml Creates a phony EC controller - required to boot Catalina SSDT-PLNF.aml Enables LCD backlight control SSDT-PLUG.aml Enables proper CPU power management SSDT-HPET.aml Fixes IRQ conflicts with MacOS SSDT-KBBL.aml Required for keyboard backlight control SSDT-SBUS-MCHC.aml This one might not actually be necessary but it doesn’t seem to have any negative side-effects Required Kexts Place these in /EFI/OC/Kexts AppleALC.kext Lilu.kext WhateverGreen.kext VirtualSMC.kext SMCBatteryManager.kext SMCProcessor.kext SMCSuperIO.kext USBMap.kext VoodooI2C.kext VoodooRMI.kext You will need to add ACPI0C50 to the info.plist file found in VoodooRMI.kext/Contents/PlugIns/RMII2C.kext/Contents/ Simply open the info.plist file, find the one instance of PNP0C50 and change it to ACPI0C50 You do not need the included VoodooSMBus.kext. Leave it out. VoodooPS2Controller.kext Custom for Chromebooks. It’s an old version but does everything we need at this point. CPUFriend.kext CPUFriendDataProvider.kext Kexts for Dell DW1560 wifi Place these in /EFI/OC/Kexts AirportBrcmFixup.kext BrcmPatchRAM3.kext BrcmBluetoothInjector.kext BrcmFirmwareData.kext Credits &amp; Sources (in no particular order and maybe missing some) Apple https://github.com/MrChromebox https://github.com/acidanthera https://github.com/alexandred https://github.com/RehabMan https://github.com/corpnewt https://www.insanelymac.com/ https://www.tonymacx86.com/ https://reddit.com/r/hackintosh https://reddit.com/r/chrultrabook https://github.com/one8three/VoodooPS2-CB13/ https://dortania.github.io/vanilla-laptop-guide/]]></summary></entry></feed>
