@@ -2,8 +2,9 @@
 title: OPNsense on RockPro64 (and ARM64)
 tags: opnsense sbc security project
 ---
-# This is a WIP and may not currently have complete info
-
+___
+This is a WIP and may not currently have complete info
+___
 # <b><u>Info</u></b>
 Although not officially supported, OPNsense can be built for several arm64 devices using the [OPNsense tools](https://github.com/opnsense/tools). I maintain a publicly accessible [arm64 repo](https://opnsense.one8three.xyz/) with an image built for the RockPro64. Since OPNsense on arm64 is not officially supported, it should be considered experimental. Use it at your own risk.
 
