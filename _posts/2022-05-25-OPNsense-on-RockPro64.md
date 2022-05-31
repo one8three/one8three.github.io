@@ -42,7 +42,7 @@ The moment you've all been waiting for!
   [Etcher](https://www.balena.io/etcher/) is an easy and reliable way to write the image to your boot media. On MacOS or Linux, you can also just use `dd if=/path/to/OPNsense.img of=/dev/sdcard` 
 
 ## <b><u>3. Post-istall</u></b>
-  After installing, you'll need to configure a few things. The initial configuration will be done by connecting an ethernet cable between the RockPro64 and another computer. In my case, the `igb0` port of my NIC was accessible at `192.168.1.1`. You will need to set your computer  Default username/password is `root/opnsense`.
+  After installing, you'll need to configure a few things. The initial configuration will be done by connecting an ethernet cable between the RockPro64 and another computer. In my case, the `igb0` port of my NIC was accessible at `192.168.1.1` with default username/password of `root/opnsense`. 
 
 ## <b><u>4. Configure the updates repo</u></b>
 <b>4a.</b> SSH into OPNsense with root privileges (this will need to be enabled through the web UI at System > Settings > Administration). Run this command to accept the fingerprint
