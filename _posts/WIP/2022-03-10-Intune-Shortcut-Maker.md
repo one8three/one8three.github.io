@@ -1,0 +1,18 @@
+---
+title: Intune Shortcut Maker
+tags: Windows PowerShell project Intune mdm
+---
+
+# Intune Shortcut Maker
+
+Intune Web App shortcuts is an easy way to deploy shortcuts to users on your Intune devices. They have one big downside though...they only deploy to user. This means the shortcut needs to install per-profile. In a shared computer environment, this is far from ideal. To work around this, I've created a script that can be packaged as a Win32 app in Intune and will allow you to create Desktop or Start Menu shortcuts.
+
+The good thing about it, you don't need to package it everythign you want to use it. Script parameters to define the following:
+  - Shortcut location (Start Menu or Desktop)
+  - Destination URL
+  - Shortcut Name
+
+To make things easy, we set the shortcut icon to the MS Edge icon.
+
+Here is the script:
+

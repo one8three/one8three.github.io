@@ -27,7 +27,7 @@ My RockPro64 image includes a few extras compared to the default OPNsense images
   - vim
   - wireguard
   - iperf3
-  - mdns-repeater
+  - ~~mdns-repeater~~ removed since it installed as "misconfigured"
   - ddclient
 
 # <b><u>Setup</u></b>
