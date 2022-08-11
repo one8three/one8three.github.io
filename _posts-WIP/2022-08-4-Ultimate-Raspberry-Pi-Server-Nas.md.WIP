@@ -1,0 +1,36 @@
+---
+title: The Ultimate Raspberry Pi Server / NAS
+tags: Raspberry Pi Server project  mdm
+---
+
+
+
+# The Ultimate Raspberry Pi Server / NAS
+
+For the last couple years I've been running a bulky old tower PC as my home server. It did its job perfectly fine but its processing power was complete overkill for what I'd been using it for. It sucked around 100w at idle and was a bit noisier than something I like sitting in my living room. 
+
+I was running all of my home services on this machine. If I needed to take it down for some reason, my home automations would stop, DNS would stop, media shares would stop, security cameras would go down, backups would stop, etc. You get the point. Bringing it down at any point, meant anyone else in the house was going to be unhappy. This lead me to the point of realizing it might be time to separate all of these services onto different devices. What to replace this server with though..? None other than Raspberry Pis of course!
+
+Most of the services I'm using don't require much disk space. Thus a Raspberry Pi running on one USB SSD is more than enough for most of them. I've split Home Assistant, PiHole, Unifi Controller, Nginx proxy manager onto one Raspberry Pi (4GB). On another (2GB), I have my 100% legally obtained media, Jellyfin, Radarr, Sonarr, Prowlarr, & qBittorrent. Backups for these devices are basically just config files and docker-compose.yml's saved in github.
+
+That left me with local device backups (TimeMachine) and photo storage (PhotoPrism). I was planning to get a 4 bay external HDD enclosure and connect it to another Rapsberry Pi. However, I was having some trouble acquiring one. I subscribed to rpilocator on Twitter so I could hopefully snag one. Eventually, a Raspberry Pi Compute Module 4 popped up. It wasn't exactly what I was looking for, but knowing there was not much time before it sold out, I went ahead and pulled the trigger on it. This is how I was lead down the rabbit hole of building the "Ultimate Raspberry Pi NAS / Home Server".
+
+
+
+
+
+| Parts                           | Cost  |
+| ---                             | ---   |
+| Raspberry Pi CM4 8GB/32GB/WiFi  | $95   |
+| Compute Module IO Board         | $35   |
+| 3D printed CM4 to ITX adapter   | $0    |
+| 3D printed IO panel             | $0    |      
+| 4 port PCIe Sata card           | $30   |
+| 4x Iron Wolf NAS drives         | $320  |
+| ATX sized power supply          | $50   |
+| Fractal Designs Node 304 Case   | $100  |
+| Optional: ATX Watchguard        | $40   |
+|                                 |       |
+| Total w/o disks                 | $310  |
+| Total w/ disks                  | $630  |
+
