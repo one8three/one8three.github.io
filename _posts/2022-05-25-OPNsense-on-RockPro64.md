@@ -19,12 +19,12 @@ Most of the information on this page does apply to any arm64 device running OPNs
 A USB Ethernet adapter can likely be used instead of the PCIe NIC but is not recommended.
 
 ## <b><u>Note</u></b>
-~~My RockPro64 image includes a few extras compared to the default OPNsense images:~~
-~~  - vim~~
-~~  - wireguard~~
-~~  - iperf3~~
-~~  - mdns-repeater~~
-~~  - ddclient~~
+~~My RockPro64 image includes a few extras compared to the default OPNsense images: ~~
+~~  - vim ~~
+~~  - wireguard ~~
+~~  - iperf3 ~~
+~~  - mdns-repeater ~~
+~~  - ddclient ~~
 
 Removed the additions as of 22.7 builds.
 
