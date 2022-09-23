@@ -3,6 +3,10 @@ title: OPNsense on RockPro64 (and ARM64)
 tags: opnsense sbc security project
 ---
 
+# NOTICE: (Sept 22, 2022)
+This project is being **discontinued**. Due to a new package being unbuildable on ARM64 after every new release, it proved to be too much trouble for me to maintain. I will leave this page up for future reference, however the **repo may cease to exist at any time!!** This page will become outdated. Hopefully OPNsense will officially support ARM64 devices at some point.
+
+For those curious, I have moved on to a Dell Wyse 5070 Extended with a virtualized OPNsense in Proxmox. I may do a write up on this soon - not that anyone will ever read this.
 
 # <b><u>Info</u></b>
 Although not officially supported, OPNsense can be built for several arm64 devices using the [OPNsense tools](https://github.com/opnsense/tools). I maintain a publicly accessible [arm64 repo](https://opnsense.one8three.xyz/) with an image built for the RockPro64. Since OPNsense on arm64 is not officially supported, it should be considered experimental. Use it at your own risk.
